@@ -1,0 +1,37 @@
+# Node modules
+/node_modules/
+
+# Logs
+*.log
+
+# npm debug log
+npm-debug.log*
+
+# Environment variables
+*.env
+.env
+
+# Build directories
+/dist/
+/build/
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+
+# IDE and editor directories
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Jest coverage output
+/coverage/
+
+# Other
+*.tgz
+
+*.test.js
