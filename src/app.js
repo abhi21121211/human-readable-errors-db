@@ -5,11 +5,11 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 
-const mongoose = require("mongoose");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const errorRoutes = require("./routes/errorRoutes");
+const { connectMongoDB } = require("./config/db");
 
 dotenv.config();
 const app = express();
@@ -36,6 +36,7 @@ const corsOptions = {
   origin: ["https://your-frontend-domain.com"],
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -43,16 +44,21 @@ app.use(limiter);
 app.use(cors(corsOptions));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error(err));
-
 // Routes
 app.use("/errors", errorRoutes);
+
+// src/app.js (Updated to include DB initialization)
+
+(async () => {
+  try {
+    await connectMongoDB();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to initialize application:", error.message);
+    process.exit(1); // Exit on failure
+  }
+})();
 
 module.exports = app;
