@@ -9,6 +9,8 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const errorRoutes = require("./routes/errorRoutes");
+const rowErrorRoutes = require("./routes/rowErrorRoutes");
+
 const { connectMongoDB } = require("./config/db");
 
 dotenv.config();
@@ -46,6 +48,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Routes
 app.use("/errors", errorRoutes);
+app.use("/rowErrors", rowErrorRoutes);
 
 // src/app.js (Updated to include DB initialization)
 
