@@ -1,22 +1,26 @@
+// src/routes/errorRoutes.js
 const express = require("express");
 const router = express.Router();
 const errorController = require("../controllers/errorController");
 const searchService = require("../services/searchService");
 
-// Search route
+// Advanced search route
 router.get("/search", async (req, res) => {
   try {
-    const { query } = req.query;
-    if (!query) {
+    const { query } = req;
+
+    // Check if a valid query exists
+    if (!query || Object.keys(query).length === 0) {
       return res.status(400).json({ message: "Query parameter missing" });
     }
 
-    const results = await searchService.searchErrors(query);
+    const results = await searchService.searchErrors(
+      query.q || query.search || ""
+    ); // Use the key that holds the actual search term
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json({
-      message: "Error fetching data",
-
+      message: "Error fetching search results",
       error: err.message,
     });
   }
