@@ -2,20 +2,48 @@ version: "3.9"
 
 services:
   app:
-    build: .
+    build:
+      context: .
     ports:
       - "4000:4000"
+    env_file:
+      - .env
     environment:
       MONGO_URI: ${MONGO_URI}
+      ELASTICSEARCH_URI: ${ELASTICSEARCH_URI}
     depends_on:
       - mongo
+      - elasticsearch
+    networks:
+      - app-network
 
   mongo:
-    image: mongo
+    image: mongo:5.0
     ports:
       - "27017:27017"
+    networks:
+      - app-network
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
       timeout: 5s
       retries: 3
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  app-network:
+    driver: bridge

@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
 # Copy all project files
 COPY . .
 
-# Expose the port Render will use
-EXPOSE 3000
+# Expose the port used by the application
+EXPOSE 4000
 
 # Start the application
 CMD ["npm", "start"]

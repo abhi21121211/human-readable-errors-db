@@ -1,0 +1,30 @@
+# Exclude node_modules from being copied into the Docker image
+node_modules
+npm-debug.log
+
+# Exclude log files
+*.log
+
+# Exclude environment files
+.env
+.env.test
+.env.local
+
+# Exclude any temporary or build-related files
+dist
+build
+.temp
+.cache
+
+# Exclude Docker-related files
+.dockerignore
+docker-compose.yml
+
+# Exclude editor and OS-specific files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
