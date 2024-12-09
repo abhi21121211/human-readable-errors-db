@@ -18,7 +18,7 @@ build
 
 # Exclude Docker-related files
 .dockerignore
-docker-compose.yml
+# docker-compose.yml
 
 # Exclude editor and OS-specific files
 *.swp
