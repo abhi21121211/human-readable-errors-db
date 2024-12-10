@@ -15,6 +15,7 @@ const { connectMongoDB } = require("./config/db");
 
 dotenv.config();
 const app = express();
+app.set("trust proxy", 1); // Trust the first proxy
 
 // Swagger Documentation
 const swaggerOptions = {
