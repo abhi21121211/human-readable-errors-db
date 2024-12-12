@@ -1,3 +1,5 @@
+// src/controllers/rowErrorController.js
+
 const RowErrorModel = require("../models/RowError");
 
 // Fetch all row errors
@@ -38,12 +40,10 @@ async function addMultipleRowErrors(req, res) {
     const savedRowErrors = await RowErrorModel.insertMany(rowErrors);
     res.status(201).json(savedRowErrors);
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        message: "Error adding multiple row errors",
-        error: err.message,
-      });
+    res.status(500).json({
+      message: "Error adding multiple row errors",
+      error: err.message,
+    });
   }
 }
 

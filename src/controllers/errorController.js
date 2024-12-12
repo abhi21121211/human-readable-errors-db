@@ -1,3 +1,5 @@
+// src/controllers/errorController.js
+
 const ErrorModel = require("../models/Error");
 const { indexError } = require("../services/searchService");
 
