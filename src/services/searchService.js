@@ -8,13 +8,48 @@ require("dotenv").config();
 const client = new Client({ node: process.env.ELASTICSEARCH_URI });
 
 /**
- * Searches errors in Elasticsearch or MongoDB as a fallback.
- * @param {string} query - The search query
+ * Search errors in MongoDB as a fallback when Elasticsearch is unavailable
+ * @param {string} query - The search term
+ * @returns {Array} - List of matching documents
+ */
+async function searchErrorsFallback(query) {
+  try {
+    const results = await ErrorModel.find({
+      $or: [
+        { language: { $regex: query, $options: "i" } },
+        { framework: { $regex: query, $options: "i" } },
+        { type: { $regex: query, $options: "i" } },
+        { code: { $regex: query, $options: "i" } },
+        { error: { $regex: query, $options: "i" } },
+        { severity: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { tags: { $regex: query, $options: "i" } },
+        { cause: { $regex: query, $options: "i" } },
+        { solution: { $regex: query, $options: "i" } },
+        { "examples.code": { $regex: query, $options: "i" } },
+        { "examples.output": { $regex: query, $options: "i" } },
+        { "resources.videos": { $regex: query, $options: "i" } },
+        { "resources.tutorials": { $regex: query, $options: "i" } },
+        { links: { $regex: query, $options: "i" } },
+        { "meta.added_by": { $regex: query, $options: "i" } },
+      ],
+    }).exec();
+
+    return results;
+  } catch (err) {
+    console.error("Error searching MongoDB:", err);
+    throw err;
+  }
+}
+
+/**
+ * Search errors using Elasticsearch with MongoDB fallback
+ * @param {string} query - The search term
  * @returns {Array} - List of matching documents
  */
 async function searchErrors(query) {
   try {
-    // Elasticsearch search
+    // Attempt to search with Elasticsearch
     const response = await client.search({
       index: "errors",
       body: {
@@ -38,17 +73,12 @@ async function searchErrors(query) {
     const hits = response?.hits?.hits || [];
     return hits.map((hit) => hit._source);
   } catch (err) {
-    console.warn("Elasticsearch unavailable, falling back to MongoDB search");
-    try {
-      // MongoDB fallback search
-      const errors = await ErrorModel.find({
-        $text: { $search: query },
-      }).lean();
-      return errors;
-    } catch (mongoErr) {
-      console.error("MongoDB search failed:", mongoErr);
-      throw new Error("Search service unavailable");
-    }
+    console.error(
+      "Elasticsearch failed. Falling back to MongoDB:",
+      err.message
+    );
+    // Fallback to MongoDB
+    return await searchErrorsFallback(query);
   }
 }
 
