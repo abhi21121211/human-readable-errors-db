@@ -1,11 +1,40 @@
 // src/services/searchService.js
 const { Client } = require("@elastic/elasticsearch");
-const mongoose = require("mongoose");
 const ErrorModel = require("../models/Error");
+const logger = require("../utils/logger");
 require("dotenv").config();
 
 // Initialize Elasticsearch client
 const client = new Client({ node: process.env.ELASTICSEARCH_URI });
+let stopElasticsearch = true;
+
+/**
+ * Parse query string to extract stack trace, error type, and additional details.
+ * @param {string} query - Raw query string
+ * @returns {Object} - Parsed query details
+ */
+function parseQuery(query) {
+  const stackTraceMatch = query.match(/at\s+(.+?)\s+\((.+?):(\d+):(\d+)\)/);
+  const errorTypeMatch = query.match(/^(\w+Error):/);
+
+  return {
+    stackTrace: stackTraceMatch ? stackTraceMatch[0] : null,
+    errorType: errorTypeMatch ? errorTypeMatch[1] : null,
+    rawQuery: query,
+  };
+}
+
+/**
+ * Format search results with detailed information.
+ * @param {Array} results - Raw search results
+ * @param {string} query - Original query string
+ * @returns {Object} - Formatted response
+ */
+function formatResponse(results, query) {
+  return {
+    results: Array.isArray(results) ? [results[0]] : results,
+  };
+}
 
 /**
  * Search errors in MongoDB as a fallback when Elasticsearch is unavailable
@@ -37,7 +66,7 @@ async function searchErrorsFallback(query) {
 
     return results;
   } catch (err) {
-    console.error("Error searching MongoDB:", err);
+    logger.error("Error searching MongoDB:", err);
     throw err;
   }
 }
@@ -45,17 +74,23 @@ async function searchErrorsFallback(query) {
 /**
  * Search errors using Elasticsearch with MongoDB fallback
  * @param {string} query - The search term
- * @returns {Array} - List of matching documents
+ * @returns {Object} - Formatted response
  */
 async function searchErrors(query) {
+  if (stopElasticsearch) {
+    logger.info("Elasticsearch disabled. Using MongoDB fallback.");
+    const fallbackResults = await searchErrorsFallback(query);
+    return formatResponse(fallbackResults, query);
+  }
+
+  const parsedQuery = parseQuery(query);
   try {
-    // Attempt to search with Elasticsearch
     const response = await client.search({
       index: "errors",
       body: {
         query: {
           multi_match: {
-            query,
+            query: parsedQuery.errorType || parsedQuery.rawQuery,
             fields: [
               "code",
               "error",
@@ -71,14 +106,12 @@ async function searchErrors(query) {
     });
 
     const hits = response?.hits?.hits || [];
-    return hits.map((hit) => hit._source);
+    const results = hits.map((hit) => ({ ...hit._source, _score: hit._score }));
+    return formatResponse(results, query);
   } catch (err) {
-    console.error(
-      "Elasticsearch failed. Falling back to MongoDB:",
-      err.message
-    );
-    // Fallback to MongoDB
-    return await searchErrorsFallback(query);
+    logger.error("Elasticsearch failed. Falling back to MongoDB:", err.message);
+    const fallbackResults = await searchErrorsFallback(query);
+    return formatResponse(fallbackResults, query);
   }
 }
 
@@ -87,16 +120,21 @@ async function searchErrors(query) {
  * @param {Object} error - The error document to be indexed
  */
 async function indexError(error) {
+  if (stopElasticsearch) {
+    logger.info("Elasticsearch indexing skipped. Elasticsearch disabled.");
+    return;
+  }
+
   try {
-    const { _id, ...body } = error; // Extract _id
+    const { _id, ...body } = error;
     await client.index({
       index: "errors",
       id: _id.toString(),
       body,
     });
-    console.log("Error indexed successfully");
+    logger.log("Error indexed successfully");
   } catch (err) {
-    console.warn("Skipping indexing due to Elasticsearch issue:", err.message);
+    logger.warn("Skipping indexing due to Elasticsearch issue:", err.message);
   }
 }
 
@@ -105,6 +143,11 @@ async function indexError(error) {
  * @param {Array} errors - List of error documents to index
  */
 async function bulkIndexErrors(errors) {
+  if (stopElasticsearch) {
+    logger.info("Bulk indexing skipped. Elasticsearch disabled.");
+    return;
+  }
+
   try {
     const body = errors.flatMap((error) => [
       { index: { _index: "errors", _id: error._id.toString() } },
@@ -116,12 +159,12 @@ async function bulkIndexErrors(errors) {
       const erroredDocuments = bulkResponse.items.filter((item) =>
         item.index.error ? true : false
       );
-      console.error("Errors in bulk indexing:", erroredDocuments);
+      logger.error("Errors in bulk indexing:", erroredDocuments);
     } else {
-      console.log("Bulk indexing completed successfully");
+      logger.log("Bulk indexing completed successfully");
     }
   } catch (err) {
-    console.warn(
+    logger.warn(
       "Skipping bulk indexing due to Elasticsearch issue:",
       err.message
     );

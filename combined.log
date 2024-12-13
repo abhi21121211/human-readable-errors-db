@@ -1,0 +1,95 @@
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-01.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Error fetching errors: getCachedData is not defined"}
+{"level":"error","message":"Error fetching errors: getCachedData is not defined"}
+{"level":"error","message":"Redis Connection Error: "}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-01.vec4i.mongodb.net"}
+{"level":"error","message":"Redis Connection Error: "}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-01.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
+{"level":"info","message":"Elasticsearch disabled. Using MongoDB fallback."}
+{"level":"info","message":"Elasticsearch disabled. Using MongoDB fallback."}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-01.vec4i.mongodb.net"}
+{"level":"error","message":"Elasticsearch failed. Falling back to MongoDB:"}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
