@@ -42,7 +42,9 @@ function formatResponse(results, query) {
  * @returns {Array} - List of matching documents
  */
 async function searchErrorsFallback(query) {
+  // console.log(query, "ffffffffffff query");
   try {
+    if (query === "" || query === undefined || query === null) return [];
     const results = await ErrorModel.find({
       $or: [
         { language: { $regex: query, $options: "i" } },
@@ -63,7 +65,7 @@ async function searchErrorsFallback(query) {
         { "meta.added_by": { $regex: query, $options: "i" } },
       ],
     }).exec();
-
+    // console.log(results, "ffffffffffffffff results");
     return results;
   } catch (err) {
     logger.error("Error searching MongoDB:", err);
@@ -80,6 +82,7 @@ async function searchErrors(query) {
   if (stopElasticsearch) {
     logger.info("Elasticsearch disabled. Using MongoDB fallback.");
     const fallbackResults = await searchErrorsFallback(query);
+    // console.log(fallbackResults, "ffffffffffffffff fallbackResults");
     return formatResponse(fallbackResults, query);
   }
 
@@ -107,6 +110,7 @@ async function searchErrors(query) {
 
     const hits = response?.hits?.hits || [];
     const results = hits.map((hit) => ({ ...hit._source, _score: hit._score }));
+    // console.log(results, "ffffffffffffff results");
     return formatResponse(results, query);
   } catch (err) {
     logger.error("Elasticsearch failed. Falling back to MongoDB:", err.message);

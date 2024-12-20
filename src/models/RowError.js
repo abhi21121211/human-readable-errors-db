@@ -2,9 +2,14 @@ const mongoose = require("mongoose");
 
 const RowErrorSchema = new mongoose.Schema(
   {
+    rowError: {
+      type: mongoose.Schema.Types.Mixed, // Allows storing unstructured data
+    },
+    errorDescription: {
+      type: String,
+    },
     errorData: {
       type: mongoose.Schema.Types.Mixed, // Allows storing unstructured data
-      required: true,
     },
     createdAt: {
       type: Date,
