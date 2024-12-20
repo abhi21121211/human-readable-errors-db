@@ -42,7 +42,6 @@ function formatResponse(results, query) {
  * @returns {Array} - List of matching documents
  */
 async function searchErrorsFallback(query) {
-  // console.log(query, "ffffffffffff query");
   try {
     if (query === "" || query === undefined || query === null) return [];
     const results = await ErrorModel.find({
