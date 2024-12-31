@@ -17,6 +17,11 @@ async function getRowErrors(req, res) {
 // Add a new row error
 async function addRowError(req, res) {
   try {
+    const existingRowError = await RowErrorModel.findOne(req.body);
+    if (existingRowError) {
+      return res.status(400).json({ message: "Row error already exists" });
+    }
+
     const rowError = new RowErrorModel(req.body);
     const savedRowError = await rowError.save();
     res.status(201).json(savedRowError);
