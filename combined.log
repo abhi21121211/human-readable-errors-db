@@ -320,3 +320,4 @@
 {"level":"info","message":"Elasticsearch disabled. Using MongoDB fallback."}
 {"level":"info","message":"Elasticsearch disabled. Using MongoDB fallback."}
 {"level":"info","message":"Elasticsearch disabled. Using MongoDB fallback."}
+{"level":"info","message":"MongoDB Connected: cluster0-shard-00-00.vec4i.mongodb.net"}
